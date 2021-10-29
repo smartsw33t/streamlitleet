@@ -1,8 +1,5 @@
 import streamlit as st
-import  matplotlib.pyplot as plt
-import matplotlib
-matplotlib.use('Agg') #backend
-from wordcloud import WordCloud #Visualization
+
 
 #Functions
 LEET_DICTIONARY={'a': '4', 'b': '13', 'c': '(', 'd': '[)', 'e': '3', 'f': '7', 'g': '9', 'h': '#', 'i': '!'}
@@ -19,14 +16,6 @@ def greek_convertor(term):
 def nato_phonetizer(term):
     result = [NATOPHONETICS_DICTIONARY.get(i,i) for i in list(term.upper())]
     return ' '.join(result)
-# Functions for visualization
-#@st.cache Deprecated
-def plot_wordcloud(docx):
-    mywordcloud= WordCloud().generate(docx)
-    fig = plt.figure(figsize= (20,10))
-    plt.imshow(mywordcloud, interpolation='bilinear')
-    plt.axis('off')
-    st.pyplot(fig)
 
 def main():
     st.title("Leet Speak App")
@@ -69,9 +58,7 @@ def main():
                 result = nato_phonetizer(raw_text)
                 st.info("Copy")
                 st.code(result) #Copiable
-                #Visualize
-                with st.expander("Visualize"):
-                    plot_wordcloud(result)
+                
     else:
         st.subheader("About")
         st.text("Leet Speak App")
